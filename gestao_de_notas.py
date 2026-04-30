@@ -34,9 +34,13 @@ def verificar(media):
 
 
 def relatorio(notas, media, situacao):
+    print()
     print('notas inseridas: ',notas)
-    print('media do aluno: ', media)
+    print()
+    print(f'media do aluno: {media:.2f}')
+    print()
     print('situação do aluno: ', situacao)
+    
 
 
 notas_do_aluno = inserir_notas()
