@@ -16,10 +16,27 @@
 
 def inserir_notas():
     notas = []
-    quantidade = int(input('digite a quantidade de notas: '))
+    while True:
+        try:
+            quantidade = int(input('digite a quantidade de notas: '))
+            if quantidade <= 0:
+                print('A quantidade deve ser maior que zero')
+                continue
+            break
+        except ValueError:
+            print('valor invalido digite numeros inteiros')
+
     for i in range(quantidade):
-        nota = float(input(f'Digite a {i+1}ª nota: '))
-        notas.append(nota)
+        while True:
+            try:
+                nota = float(input(f'Digite a {i+1}ª nota: '))
+                if nota < 0 or nota > 10:
+                    print('nota invalida a nota deve ser entre 0 e 10')
+                    continue
+                notas.append(nota)
+                break
+            except ValueError:
+                print('valor invalido digite um numero Ex: 5.5 ou 7')
     return notas 
     
 def calcular_media(notas):
