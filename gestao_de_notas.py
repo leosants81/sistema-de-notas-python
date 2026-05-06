@@ -14,58 +14,46 @@
 # Relatório Final:
 # Exibir as notas inseridas, a média e a situação do aluno. 
 
-def inserir_notas():
-    notas = []
-    while True:
-        try:
-            quantidade = int(input('digite a quantidade de notas: '))
-            if quantidade <= 0:
-                print('A quantidade deve ser maior que zero')
-                continue
-            break
-        except ValueError:
-            print('valor invalido digite numeros inteiros')
-
-    for i in range(quantidade):
-        while True:
-            try:
-                nota = float(input(f'Digite a {i+1}ª nota: '))
-                if nota < 0 or nota > 10:
-                    print('nota invalida a nota deve ser entre 0 e 10')
-                    continue
-                notas.append(nota)
-                break
-            except ValueError:
-                print('valor invalido digite um numero Ex: 5.5 ou 7')
-    return notas 
-    
-def calcular_media(notas):
-    return sum(notas) / len(notas)
+class Aluno:
+    def __init__(self, nome):
+        self.nome = nome 
+        self.notas = [] 
 
 
-def verificar(media):
-    if media >= 7:
-        return 'o aluno esta aprovado'
-    else:
-        return 'o aluno esta reprovado'
+    def adicionar_nota(self, nota):
+        if nota < 0 or nota > 10:
+            raise ValueError('Nota deve ser entre 0 e 10')
+        self.notas.append(nota)
 
 
-def relatorio(notas, media, situacao):
-    print()
-    print('notas inseridas: ',notas)
-    print()
-    print(f'media do aluno: {media:.2f}')
-    print()
-    print('situação do aluno: ', situacao)
-    
+    def calcular_media(self):
+        if not self.notas:
+            return 0
+        return sum(self.notas) / len(self.notas)
+        
+
+    def situacao(self):
+        media = self.calcular_media()
+        if media >= 7:
+            return "o aluno esta aprovado"
+        else:
+            return "o aluno esta reprovado"
 
 
-notas_do_aluno = inserir_notas()
-media_do_aluno = calcular_media(notas_do_aluno)
-verificar_media = verificar(media_do_aluno)
-relatorio_do_aluno = relatorio(notas_do_aluno, media_do_aluno, verificar_media)
 
 
-# Erro corrigido na primeira função return dentro do for linha 23 
-# a função encerrava na primeira repetição 
-# função verificar os return estava como print o relatorio aparecia None 
+aluno = Aluno("Léo")
+print(f'Aluno: {aluno.nome}')
+
+try:
+    aluno.adicionar_nota(8)
+    aluno.adicionar_nota(7.8)
+    aluno.adicionar_nota(10) 
+
+except ValueError as e:
+    print(f'Erro capturado: {e}')
+
+
+print(f'Notas: {aluno.notas}')
+print(f'Média: {aluno.calcular_media():.2f}')
+print(f'Situação: {aluno.situacao()}')
