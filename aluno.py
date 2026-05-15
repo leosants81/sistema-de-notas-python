@@ -10,7 +10,7 @@ class Aluno(Pessoa):
     def adicionar_nota(self, materia, *notas):
 
         if not notas:
-            raise ValueError('informe ao meno uma nota')
+            raise ValueError('informe ao menos uma nota')
 
         if materia.nome not in self.notas:
             self.notas[materia.nome] = []
