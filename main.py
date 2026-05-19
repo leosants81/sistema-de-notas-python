@@ -28,6 +28,7 @@ def menu():
     print('7 - Listar alunos')
     print('8 - Listar professores')
     print('9 - Dados do professor')
+    print('10 - Adicionar materia ao professor')
     print('0 - Sair')
     return input('\n Escolha uma opção: ')
 
@@ -66,7 +67,7 @@ def cadastrar_professor():
             print('cadastre uma materia primeiro')
             return
         for i, m in enumerate(materias):
-            print(f'{i} - {m.nome}')
+            print(f'{i} - {m.nome} ({m.periodo})')
         idx = int(input('Escolha a materia: '))
         p = Professor(nome, endereco, salario, [materias[idx]])
         professores.append(p)
@@ -130,6 +131,29 @@ def listar_professores():
     print('\nProfessores')
     for p in sorted(professores, key=lambda p: p.nome):
         print(f'- {p.nome}')
+    input('\nPrecione Enter para continuar')
+
+def adicionar_materia_professor():
+    limpar()
+    professor = escolher(professores, 'professor')
+    if professor is None:
+        return 
+    limpar()
+    if not materias:
+        print('Nenhuma materia cadastrada')
+        input('\nPrecione Enter para continuar')
+        return
+    for i, m in enumerate(materias):
+        print(f'{i} - {m.nome} - ({m.periodo})')
+    try:
+        idx = int(input('Escolha a materia: '))
+        if idx < 0 or idx >= len(materias):
+            print('Opção invalida')
+            input('\nPrecione Enter para continuar')
+            return 
+        professor.adicionar_materia(materias[idx])
+    except ValueError:
+        print('Digite apenas numeros')
     input('\nPrecione Enter para continuar')
 
 def ver_dados_professor():
@@ -198,6 +222,8 @@ while True:
         listar_professores()
     elif opcao == '9':
         ver_dados_professor()
+    elif opcao == '10':
+        adicionar_materia_professor()
     elif opcao == '0':
         print('Saindo')
         break

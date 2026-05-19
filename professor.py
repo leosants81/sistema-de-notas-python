@@ -36,7 +36,7 @@ class Professor(Pessoa):
             print(f'{materia.nome} - {materia.periodo}')
 
     def mostrar_salario(self):
-        print(f'Salario: {self.__salario}')
+        print(f'Salario: R$ {self.__salario:.2f}')
 
     def dados(self):
         print(f'Professor: {self.nome}')
