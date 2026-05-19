@@ -6,8 +6,7 @@ class Professor(Pessoa):
     def __init__(self, nome, endereco, salario, materias):
         super().__init__(nome, endereco)
 
-        self.materias = materias 
-        
+        self.materias = materias
 
         if not isinstance(salario, (int, float)):
             raise TypeError('Salario deve ser numérico')
@@ -17,14 +16,12 @@ class Professor(Pessoa):
 
         self.__salario = salario
 
-
     def adicionar_materia(self, materia):
         self.materias.append(materia)
 
     def aumentar_salario(self, valor_por_materia):
         self.__salario += valor_por_materia
         print(f'Novo salario: {self.__salario:.2f}')
-
 
     def lancar_nota(self, aluno, materia, *nota):
 
@@ -40,7 +37,6 @@ class Professor(Pessoa):
 
     def mostrar_salario(self):
         print(f'Salario: {self.__salario}')
-
 
     def dados(self):
         print(f'Professor: {self.nome}')
