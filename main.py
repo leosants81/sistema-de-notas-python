@@ -15,6 +15,9 @@ boletim = Boletim()
 def limpar():
     os.system('cls')
 
+def pausar():
+    input('\nPresione Enter para continuar')
+
 
 def menu():
     limpar()
@@ -44,7 +47,7 @@ def cadastrar_materia():
         print(f'Materia {nome} cadastrada')
     except ValueError as e:
         print(f'Erro: {e}')
-    input('\nPrecione Enter para continuar')
+    pausar()
 
 
 def cadastrar_aluno():
@@ -54,7 +57,7 @@ def cadastrar_aluno():
     a = Aluno(nome, endereco)
     alunos.append(a)
     print(f'Aluno {nome} cadastrado')
-    input('\nPrecione Enter para continuar')
+    pausar()
 
 
 def cadastrar_professor():
@@ -74,7 +77,7 @@ def cadastrar_professor():
         print(f'Professor {nome} cadastrado ')
     except (ValueError, TypeError, IndexError) as e:
         print(f'Erro: {e}')
-    input('\nPrecione Enter para continuar')
+    pausar()
 
 
 def aumentar_salario():
@@ -90,7 +93,7 @@ def aumentar_salario():
         professores[idx].aumentar_salario(valor)
     except (ValueError, IndexError) as e:
         print(f'Erro: {e}')
-    input('\nPrecione Enter para continuar')
+    pausar()
 
 
 def escolher(lista, tipo):
@@ -114,24 +117,24 @@ def listar_alunos():
     limpar()
     if not alunos:
         print('Nenhum aluno cadastrado')
-        input('\nPrecione Enter para continuar')
+        pausar()
         return
     print('\nAlunos')
     for a in sorted(alunos, key=lambda a: a.nome):
         print(f'- {a.nome}')
-    input('\nPrecione Enter para continuar')
+    pausar()
 
 
 def listar_professores():
     limpar()
     if not professores:
         print('Nenhum professor cadastrado')
-        input('\nPrecione Enter para continuar')
+        pausar()
         return
     print('\nProfessores')
     for p in sorted(professores, key=lambda p: p.nome):
         print(f'- {p.nome}')
-    input('\nPrecione Enter para continuar')
+    pausar()
 
 def adicionar_materia_professor():
     limpar()
@@ -141,7 +144,7 @@ def adicionar_materia_professor():
     limpar()
     if not materias:
         print('Nenhuma materia cadastrada')
-        input('\nPrecione Enter para continuar')
+        pausar()
         return
     for i, m in enumerate(materias):
         print(f'{i} - {m.nome} - ({m.periodo})')
@@ -149,12 +152,12 @@ def adicionar_materia_professor():
         idx = int(input('Escolha a materia: '))
         if idx < 0 or idx >= len(materias):
             print('Opção invalida')
-            input('\nPrecione Enter para continuar')
+            pausar()
             return 
         professor.adicionar_materia(materias[idx])
     except ValueError:
         print('Digite apenas numeros')
-    input('\nPrecione Enter para continuar')
+    pausar()
 
 def ver_dados_professor():
     limpar()
@@ -168,7 +171,7 @@ def ver_dados_professor():
     professor.mostrar_salario()
     print(f'\nMaterias: ')
     professor.mostrar_materias()
-    input('\nPrecione Enter para continuar')
+    pausar()
 
 def lancar_nota():
     limpar()
@@ -188,7 +191,7 @@ def lancar_nota():
         print('Notas lançadas')
     except ValueError as e:
         print(f'Erro: {e}')
-    input('\nPrecione Enter para continuar')
+    pausar()
 
 
 def ver_boletim():
@@ -199,7 +202,7 @@ def ver_boletim():
         print(f'{i} - {a.nome}')
     idx = int(input('Escola o aluno: '))
     boletim.mostrar_boletim(alunos[idx])
-    input('\nPrecione Enter para continuar')
+    pausar()
 
 
 while True:

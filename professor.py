@@ -31,8 +31,9 @@ class Professor(Pessoa):
         aluno.adicionar_nota(materia, *nota)
 
     def mostrar_materias(self):
-
-        for materia in self.materias:
+        ordem = ['manha', 'tarde', 'noite']
+        ordenadas = sorted(self.materias, key=lambda m: ordem.index(m.periodo))
+        for materia in ordenadas:
             print(f'{materia.nome} - {materia.periodo}')
 
     def mostrar_salario(self):
