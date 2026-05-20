@@ -15,6 +15,7 @@ boletim = Boletim()
 def limpar():
     os.system('cls')
 
+
 def pausar():
     input('\nPresione Enter para continuar')
 
@@ -136,11 +137,12 @@ def listar_professores():
         print(f'- {p.nome}')
     pausar()
 
+
 def adicionar_materia_professor():
     limpar()
     professor = escolher(professores, 'professor')
     if professor is None:
-        return 
+        return
     limpar()
     if not materias:
         print('Nenhuma materia cadastrada')
@@ -153,17 +155,18 @@ def adicionar_materia_professor():
         if idx < 0 or idx >= len(materias):
             print('Opção invalida')
             pausar()
-            return 
+            return
         professor.adicionar_materia(materias[idx])
     except ValueError:
         print('Digite apenas numeros')
     pausar()
 
+
 def ver_dados_professor():
     limpar()
     professor = escolher(professores, 'professor')
     if professor is None:
-        return 
+        return
     limpar()
     print('\nDados do professor')
     print(f'Nome: {professor.nome}')
@@ -172,6 +175,7 @@ def ver_dados_professor():
     print(f'\nMaterias: ')
     professor.mostrar_materias()
     pausar()
+
 
 def lancar_nota():
     limpar()
@@ -195,8 +199,10 @@ def lancar_nota():
 
 
 def ver_boletim():
+    limpar()
     if not alunos:
         print('Nenhum aluno cadastrado')
+        pausar()
         return
     for i, a in enumerate(alunos):
         print(f'{i} - {a.nome}')
@@ -204,31 +210,26 @@ def ver_boletim():
     boletim.mostrar_boletim(alunos[idx])
     pausar()
 
+acoes = {
+    '1': cadastrar_materia,
+    '2': cadastrar_aluno,
+    '3': cadastrar_professor,
+    '4': lancar_nota,
+    '5': ver_boletim,
+    '6': aumentar_salario,
+    '7': listar_alunos,
+    '8': listar_professores,
+    '9': ver_dados_professor,
+    '10': adicionar_materia_professor,
+}
 
 while True:
     opcao = menu()
-    if opcao == '1':
-        cadastrar_materia()
-    elif opcao == '2':
-        cadastrar_aluno()
-    elif opcao == '3':
-        cadastrar_professor()
-    elif opcao == '4':
-        lancar_nota()
-    elif opcao == '5':
-        ver_boletim()
-    elif opcao == '6':
-        aumentar_salario()
-    elif opcao == '7':
-        listar_alunos()
-    elif opcao == '8':
-        listar_professores()
-    elif opcao == '9':
-        ver_dados_professor()
-    elif opcao == '10':
-        adicionar_materia_professor()
-    elif opcao == '0':
+    if opcao == '0':
         print('Saindo')
         break
+    acao = acoes.get(opcao)
+    if acao:
+        acao()
     else:
         print('Opção invalida')
